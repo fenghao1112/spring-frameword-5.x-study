@@ -13,7 +13,7 @@ public class AppTest {
 		AnnotationConfigApplicationContext context =
 				new AnnotationConfigApplicationContext();
 		// context.register(UserDao.class); 这种方式注册bean不需要加注解，但是要调用refresh()方法
-		context.register(AppConfig.class,AppConfig2.class);
+		context.register(AppConfig.class);
 		context.refresh();
 		UserDao userDao = context.getBean(UserDao.class);
 		UserDao3  userDao3 = (UserDao3) context.getBean("com.fh.project.dao.UserDao3");

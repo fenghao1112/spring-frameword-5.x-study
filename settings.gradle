@@ -30,5 +30,5 @@ rootProject.children.each {project ->
 	project.buildFileName = "${project.name}.gradle"
 }
 include 'study-ioc'
-include 'study-ioc'
+include 'study-springmvc'
 
