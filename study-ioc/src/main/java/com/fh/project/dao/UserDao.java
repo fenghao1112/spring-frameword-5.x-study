@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 public class UserDao {
 
 	public void query(){
-		System.out.println("query....");
+		System.out.println("userDao   query....");
 	}
 
 }
