@@ -7,8 +7,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @Configuration
 @ComponentScan("com.fh.project")
-@EnableImport
-@EnableAspectJAutoProxy
+//@EnableImport
+//@EnableAspectJAutoProxy
 public class AppConfig {
 
 }

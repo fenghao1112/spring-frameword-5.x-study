@@ -283,6 +283,7 @@ public class ConfigurationClassPostProcessor implements BeanDefinitionRegistryPo
 				以上都属于配置类
 		 */
 			else if (ConfigurationClassUtils.checkConfigurationClassCandidate(beanDef, this.metadataReaderFactory)) {
+				// 添加到configCandidates中，下面的代码继续对这些配置类作处理
 				configCandidates.add(new BeanDefinitionHolder(beanDef, beanName));
 			}
 		}

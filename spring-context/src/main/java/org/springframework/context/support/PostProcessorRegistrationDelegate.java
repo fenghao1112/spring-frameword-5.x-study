@@ -57,12 +57,15 @@ final class PostProcessorRegistrationDelegate {
 		if (beanFactory instanceof BeanDefinitionRegistry) {
 			// DefaultListableBeanFactory 转成BeanDefinitionRegistry
 			BeanDefinitionRegistry registry = (BeanDefinitionRegistry) beanFactory;
+
 			// 存放实现了BeanFactoryPostProcessor接口的PostProcessor
 			List<BeanFactoryPostProcessor> regularPostProcessors = new ArrayList<>();
+
 			// 存放实现了BeanDefinitionRegistryPostProcessor接口的PostProcessor
 			// BeanDefinitionRegistryPostProcessor继承了BeanFactoryPostProcessor的接口，多了一个方法
 			List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
 
+			// 遍历所有的BeanFactoryPostProcessor，第一次进来是空的
 			for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessors) {
 				if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
 					BeanDefinitionRegistryPostProcessor registryProcessor =
@@ -83,6 +86,10 @@ final class PostProcessorRegistrationDelegate {
 			List<BeanDefinitionRegistryPostProcessor> currentRegistryProcessors = new ArrayList<>();
 
 			// First, invoke the BeanDefinitionRegistryPostProcessors that implement PriorityOrdered.
+			/*
+			获取spring中实现类BeanDefinitionRegistryPostProcessor接口的类
+			org.springframework.context.annotation.internalConfigurationAnnotationProcessor
+			 */
 			String[] postProcessorNames =
 					beanFactory.getBeanNamesForType(BeanDefinitionRegistryPostProcessor.class, true, false);
 			for (String ppName : postProcessorNames) {
@@ -96,7 +103,7 @@ final class PostProcessorRegistrationDelegate {
 			registryProcessors.addAll(currentRegistryProcessors);
 			// 调用bd注册的后置处理器，插手bd的生成
 			// spring默认只有一个BeanDefinitaionFactoryPostProcessor(ConfigurationClassPostProcessor)
-			// 执行所有的BeanDefinitionRegistryPostProcessor 包括自定义的
+			// 执行所有的BeanDefinitionRegistryPostProcessor接口的实现类 包括自定义的
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			currentRegistryProcessors.clear();
 
