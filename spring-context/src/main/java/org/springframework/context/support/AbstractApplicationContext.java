@@ -719,9 +719,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	protected void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
 		// BeanFactoryPostProcessor 分为三种
 		//  1、spring内部自定义的
-		// 2、程序员自己实现的BeanFactoryPostProcessor的类，但是加了@Componet注解
+		// 2、程序员自己实现的BeanFactoryPostProcessor接口的类，但是加了@Componet注解
 		// 3、自己定义的BeanFactoryProcessor,手动添加给spring的（调用ApplicationContext.addBeanFactoryProcessor方法）
-		// 下面这一行代码getBeanFactoryPostProcessors()拿到的是第三种的BeanFactoryProcessor
+		// 下面这一行代码中getBeanFactoryPostProcessors()拿到的是第三种的BeanFactoryProcessor
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
 
 		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime

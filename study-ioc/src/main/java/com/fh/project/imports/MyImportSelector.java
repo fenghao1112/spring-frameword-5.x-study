@@ -1,9 +1,8 @@
-package com.fh.project.service;
+package com.fh.project.imports;
 
 import com.fh.project.dao.UserDao3;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;
-
 
 public class MyImportSelector implements ImportSelector {
 	@Override
