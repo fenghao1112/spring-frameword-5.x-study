@@ -622,7 +622,9 @@ class ConfigurationClassParser {
 					// 解析实现类ImportSelector接口的类
 					if (candidate.isAssignable(ImportSelector.class)) {
 						// Candidate class is an ImportSelector -> delegate to it to determine imports
+						// 获取自定义的ImportSelector的类
 						Class<?> candidateClass = candidate.loadClass();
+						// 实例化自定义的ImportSelector
 						ImportSelector selector = BeanUtils.instantiateClass(candidateClass, ImportSelector.class);
 						ParserStrategyUtils.invokeAwareMethods(
 								selector, this.environment, this.resourceLoader, this.registry);
@@ -631,7 +633,7 @@ class ConfigurationClassParser {
 									new DeferredImportSelectorHolder(configClass, (DeferredImportSelector) selector));
 						}
 						else {
-							// 获取自定义类返回的类名
+							// 获取自定义类ImportSelector中的方法返回的类全限定名
 							String[] importClassNames = selector.selectImports(currentSourceClass.getMetadata());
 							Collection<SourceClass> importSourceClasses = asSourceClasses(importClassNames);
 							// 递归解析是否有@Import类

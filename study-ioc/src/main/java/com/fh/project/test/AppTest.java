@@ -2,10 +2,10 @@ package com.fh.project.test;
 
 import com.fh.project.config.AppConfig;
 import com.fh.project.config.AppConfig2;
-import com.fh.project.dao.UserDao;
-import com.fh.project.dao.UserDao3;
-import com.fh.project.service.UserService;
+import com.fh.project.dao.Dao;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.io.IOException;
 
 public class AppTest {
 
@@ -17,8 +17,10 @@ public class AppTest {
 		context.register(AppConfig.class);
 		context.register(AppConfig2.class);
 		context.refresh();
-		context.getBean(UserService.class).query();
 
+		//context.getBean(UserService.class).query();
+//		Dao userDao = (Dao) context.getBean("userDao");
+//		userDao.query();
 		/*UserDao userDao = context.getBean(UserDao.class);
 		userDao.query();
 		UserDao3  userDao3 = (UserDao3) context.getBean("com.fh.project.dao.UserDao3");

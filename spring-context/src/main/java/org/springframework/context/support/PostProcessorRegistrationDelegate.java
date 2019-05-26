@@ -65,16 +65,17 @@ final class PostProcessorRegistrationDelegate {
 			// BeanDefinitionRegistryPostProcessor继承了BeanFactoryPostProcessor的接口，多了一个方法
 			List<BeanDefinitionRegistryPostProcessor> registryProcessors = new ArrayList<>();
 
-			// 遍历所有的BeanFactoryPostProcessor，第一次进来是空的
+			// 遍历所有的手动注册到spring容器中的BeanFactoryPostProcessor（调用ApplicationContext.addBeanFactoryProcessor方法）
 			for (BeanFactoryPostProcessor postProcessor : beanFactoryPostProcessors) {
 				if (postProcessor instanceof BeanDefinitionRegistryPostProcessor) {
 					BeanDefinitionRegistryPostProcessor registryProcessor =
 							(BeanDefinitionRegistryPostProcessor) postProcessor;
+					// 执行实现BeanDefinitionRegistryPostProcessor的接口的类
 					registryProcessor.postProcessBeanDefinitionRegistry(registry);
-					// spring默认只有一个ConfigurationClassPostProcessor被添加进去
 					registryProcessors.add(registryProcessor);
 				}
 				else {
+					// 添加的是实现了beanFactoryPostProcessor接口的类，会在后面统一执行
 					regularPostProcessors.add(postProcessor);
 				}
 			}
@@ -102,7 +103,7 @@ final class PostProcessorRegistrationDelegate {
 			sortPostProcessors(currentRegistryProcessors, beanFactory);
 			registryProcessors.addAll(currentRegistryProcessors);
 			// 调用bd注册的后置处理器，插手bd的生成
-			// spring默认只有一个BeanDefinitaionFactoryPostProcessor(ConfigurationClassPostProcessor)
+			// spring默认只有一个BeanDefinitaionFactoryPos tProcessor(ConfigurationClassPostProcessor)
 			// 执行所有的BeanDefinitionRegistryPostProcessor接口的实现类 包括自定义的
 			invokeBeanDefinitionRegistryPostProcessors(currentRegistryProcessors, registry);
 			currentRegistryProcessors.clear();
@@ -139,7 +140,9 @@ final class PostProcessorRegistrationDelegate {
 			}
 
 			// Now, invoke the postProcessBeanFactory callback of all processors handled so far.
+			// 执行BeanDefinitionRegistryPostProcessor接口中postProcessBeanFactory()方法
 			invokeBeanFactoryPostProcessors(registryProcessors, beanFactory);
+			// 执行自定义的BeanFactoryPostProcess中postProcessBeanFactory()方法，这里不会执行到到
 			invokeBeanFactoryPostProcessors(regularPostProcessors, beanFactory);
 		}
 
@@ -190,6 +193,7 @@ final class PostProcessorRegistrationDelegate {
 		for (String postProcessorName : nonOrderedPostProcessorNames) {
 			nonOrderedPostProcessors.add(beanFactory.getBean(postProcessorName, BeanFactoryPostProcessor.class));
 		}
+		// 这里执行程序员自己实现BeanFactoryPostProcessor的类
 		invokeBeanFactoryPostProcessors(nonOrderedPostProcessors, beanFactory);
 
 		// Clear cached merged bean definitions since the post-processors might have
