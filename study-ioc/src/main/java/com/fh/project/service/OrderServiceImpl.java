@@ -2,6 +2,9 @@ package com.fh.project.service;
 
 import com.fh.project.dao.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
+
 
 public class OrderServiceImpl implements UserService{
 

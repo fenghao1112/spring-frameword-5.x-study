@@ -3,7 +3,10 @@ package com.fh.project.dao;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-//@Component
+import javax.annotation.Priority;
+
+@Component
+@Priority(1)
 public class UserDao implements Dao{
 
 	public UserDao() {
