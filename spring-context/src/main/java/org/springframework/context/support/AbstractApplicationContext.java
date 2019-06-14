@@ -538,13 +538,15 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				invokeBeanFactoryPostProcessors(beanFactory);
 
 				// Register bean processors that intercept bean creation.
-				// 注册BeanPostProcessors
+				// 注册BeanPostProcessor
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
+				// 暂时不看，处理国际化相关的
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
+				// spring 事件
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
@@ -552,6 +554,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				onRefresh();
 
 				// Check for listener beans and register them.
+				// 注册监听器
 				registerListeners();
 
 				// Instantiate all remaining (non-lazy-init) singletons.

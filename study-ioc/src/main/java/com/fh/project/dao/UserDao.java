@@ -3,7 +3,7 @@ package com.fh.project.dao;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-//@Component
+@Component
 public class UserDao implements Dao{
 
 	public UserDao() {

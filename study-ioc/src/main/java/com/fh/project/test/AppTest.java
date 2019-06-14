@@ -21,9 +21,11 @@ public class AppTest {
 		//BeanFactory beanFactory = (BeanFactory) context;
 		// context.register(UserDao.class); 这种方式注册bean不需要加注解，但是要调用refresh()方法
 		context.register(AppConfig.class);
-		context.register(AppConfig2.class);
+		//context.register(AppConfig2.class);
 		context.refresh();
 
+		UserService userService = (UserService)context.getBean("userServiceImpl");
+		userService.query();
 		//context.getBean(UserService.class).query();
 //		Dao userDao = (Dao) context.getBean("userDao");
 //		userDao.query();
