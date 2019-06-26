@@ -186,6 +186,7 @@ class ConfigurationClassParser {
 			}
 		}
 
+		// 处理延时加载的ImportSelector
 		processDeferredImportSelectors();
 	}
 
@@ -332,6 +333,7 @@ class ConfigurationClassParser {
 		}
 
 		// Process individual @Bean methods
+		// 获取配置类中的@Bean 方法
 		Set<MethodMetadata> beanMethods = retrieveBeanMethodMetadata(sourceClass);
 		for (MethodMetadata methodMetadata : beanMethods) {
 			configClass.addBeanMethod(new BeanMethod(methodMetadata, configClass));

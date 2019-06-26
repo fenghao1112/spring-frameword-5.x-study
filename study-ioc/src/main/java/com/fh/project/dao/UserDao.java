@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.annotation.Priority;
 
 @Component
-@Priority(1)
+//@Priority(1)
 public class UserDao implements Dao{
 
 	public UserDao() {

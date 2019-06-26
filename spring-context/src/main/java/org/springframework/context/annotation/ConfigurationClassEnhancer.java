@@ -132,7 +132,7 @@ class ConfigurationClassEnhancer {
 		/*
 		 	BeanFactoryAwareGeneratorStrategy定义生成策略
 		 	为代理类定义成员变量$$beanFactory
-		 	同时基于EnhancedConfiguration中的BeanFactoryAware的生成setBeanFactory()方法
+		 	同时基于EnhancedConfiguration中的BeanFactoryAware的生成 setBeanFactory() 方法
 		 	这样就可以通过beanFactory获取对象
 		  */
 		enhancer.setStrategy(new BeanFactoryAwareGeneratorStrategy(classLoader));
