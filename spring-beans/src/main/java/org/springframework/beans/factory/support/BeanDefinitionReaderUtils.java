@@ -146,10 +146,13 @@ public class BeanDefinitionReaderUtils {
 			throws BeanDefinitionStoreException {
 
 		// Register bean definition under primary name.
+		// 注册bd
 		String beanName = definitionHolder.getBeanName();
+		// 调用父类GenericApplicationContext的registerBeanDefinition方法
 		registry.registerBeanDefinition(beanName, definitionHolder.getBeanDefinition());
 
 		// Register aliases for bean name, if any.
+		// 处理spring bean的别名
 		String[] aliases = definitionHolder.getAliases();
 		if (aliases != null) {
 			for (String alias : aliases) {

@@ -216,7 +216,7 @@ public class AnnotatedBeanDefinitionReader {
 	 * @since 5.0
 	 */
 	<T> void doRegisterBean(Class<T> annotatedClass, @Nullable Supplier<T> instanceSupplier, @Nullable String name,
-			@Nullable Class<? extends Annotation>[] qualifiers, BeanDefinitionCustomizer... definitionCustomizers) {
+							 @Nullable Class<? extends Annotation>[] qualifiers, BeanDefinitionCustomizer... definitionCustomizers) {
 		/*
 		AnnotatedGenericBeanDefinition 通用注解bean的定义类
 		 */
@@ -235,8 +235,13 @@ public class AnnotatedBeanDefinitionReader {
 		// 获取bean的名字
 		String beanName = (name != null ? name : this.beanNameGenerator.generateBeanName(abd, this.registry));
 
-		// 设置bd中一些通用的属性，比如Primary，Scope,DeponsOn
+		// 设置bd中一些通用的属性，比如Primary，Scope,DepondsOn
 		AnnotationConfigUtils.processCommonDefinitionAnnotations(abd);
+
+		/*
+			spring内部可以通过qualifiers设置bd中的通用的属性,比如Primary，Scope,DepondsOn
+			默认是空的
+		 */
 		if (qualifiers != null) {
 			for (Class<? extends Annotation> qualifier : qualifiers) {
 				if (Primary.class == qualifier) {
@@ -250,7 +255,7 @@ public class AnnotatedBeanDefinitionReader {
 				}
 			}
 		}
-		// 自定义bean
+		// 自定义bean，这个也是空的
 		for (BeanDefinitionCustomizer customizer : definitionCustomizers) {
 			customizer.customize(abd);
 		}
@@ -262,6 +267,7 @@ public class AnnotatedBeanDefinitionReader {
 
 		/*
 		根据scopeMetadata中的ScopedProxyMode属性（默认是no）是否返回代理类
+		web 中用到的这个属性
 		 */
 		definitionHolder = AnnotationConfigUtils.applyScopedProxyMode(scopeMetadata, definitionHolder, this.registry);
 

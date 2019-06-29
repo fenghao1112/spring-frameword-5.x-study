@@ -62,8 +62,6 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
 	 */
 	public AnnotationConfigApplicationContext() {
-		// 首先调用了父类的构造方法，创建了new DefaultListableBeanFactory()这个对象
-
 		// 创建了一个读取注解的bean定义的读取器(获取spring内部定义bd)
 		// this代表的是当前对象，是BeanDefinitionRegistry接口的一个实现
 		this.reader = new AnnotatedBeanDefinitionReader(this);
@@ -91,6 +89,7 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * e.g. {@link Configuration @Configuration} classes
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... annotatedClasses) {
+		// 首先调用了父类的构造方法，创建了new DefaultListableBeanFactory()这个对象
 		// 调用空的构造方法，主要是为将spring内部的bd注册到beanDefinitionMap中
 		this();
 		// 注册外部的bd,接收多个class，内部遍历
