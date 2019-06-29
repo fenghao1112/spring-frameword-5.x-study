@@ -135,9 +135,11 @@ class ConfigurationClassBeanDefinitionReader {
 			return;
 		}
 
+		// 判断这个类是否被别的类@Import
 		if (configClass.isImported()) {
 			registerBeanDefinitionForImportedConfigurationClass(configClass);
 		}
+		// 获取配置类的bean方法
 		for (BeanMethod beanMethod : configClass.getBeanMethods()) {
 			loadBeanDefinitionsForBeanMethod(beanMethod);
 		}
@@ -215,10 +217,12 @@ class ConfigurationClassBeanDefinitionReader {
 		if (metadata.isStatic()) {
 			// static @Bean method
 			beanDef.setBeanClassName(configClass.getMetadata().getClassName());
+			//定义创建该Bean对象的工厂方法 <bean factory-method="">
 			beanDef.setFactoryMethodName(methodName);
 		}
 		else {
 			// instance @Bean method
+			//定义创建该Bean对象的工厂类  <bean factory-bean="">
 			beanDef.setFactoryBeanName(configClass.getBeanName());
 			beanDef.setUniqueFactoryMethodName(methodName);
 		}

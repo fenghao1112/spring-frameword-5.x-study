@@ -22,12 +22,12 @@ import org.springframework.context.annotation.Import;
 public class AppConfig {
 
 	@Bean
-	public UserService userService(){
+	public UserServiceImpl userService(){
 		return new UserServiceImpl();
 	}
 
 	@Bean
-	public UserService orderService(){
+	public OrderServiceImpl orderService(){
 		userService();
 		return new OrderServiceImpl();
 	}
